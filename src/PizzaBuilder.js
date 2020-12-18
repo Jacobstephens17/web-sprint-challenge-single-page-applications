@@ -1,22 +1,81 @@
-import React from 'react'
+import Axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { Link, useRouteMatch } from 'react-router-dom'
+import schema from "./cypress/integration/schema";
+import axios from 'axios'
+import * as yup from 'yup'
 
 
-function PizzaBuilder(props) {
+const initialPizzaValues = {
+    size: "",
+    sauce: "",
+    pepperoni: false,
+    sausage: false,
+    mushrooms: false,
+    olives: false,
+    glutenFree: false,
+    special: "",
+  };
+  
+  const initFormErrors = {
+    size: "",
+    sauce: "",
+  };
+  
+  const toppingsList = ["pepperoni", "sausage", "mushrooms", "olives"];
+  
+  const PizzaBuilder = () => {
+    const [pizzaValues, setpizzaValues] = useState(initialPizzaValues);
+    const [disabled, setDisabled] = useState(true);
+    const [formErrors, setFormErrors] = useState(initFormErrors);
 
-    const { values, submit, change, disabled, errors } = props;
+  
 
-    const onSubmit = (event) => {
-        event.preventDefault();
-        submit();
+  
+    const postNewOrder = (newOrder) => {
+      axios.post("https://reqres.in/api/users", newOrder).then((result) => {
+        setpizzaValues(initialPizzaValues);
+      });
+    };
+  
+    const onChange = (evt) => {
+      const { name, value, type, checked } = evt.target;
+      const valueToUse = type === "checkbox" ? checked : value;
+      yup
+        .reach(schema, name)
+        .validate(value)
+        .then(() => {
+          setFormErrors({
+            ...formErrors,
+            [name]: "",
+          });
+        })
+        .catch((err) => {
+          setFormErrors({
+            ...formErrors,
+            [name]: err.errors[0],
+          });
+        });
+      setpizzaValues({
+        ...pizzaValues,
+        [name]: valueToUse,
+      });
+    };
+  
+    const onSubmit = (e) => {
+      e.preventDefault();
+      const newOrder = {
+        size: pizzaValues.size,
+        sauce: pizzaValues.sauce,
+        toppings: toppingsList.filter(topping => {
+            return pizzaValues[topping];
+        }),
+        glutenFree: pizzaValues.glutenFree,
+        special: pizzaValues.special,
       };
-    
-      const onChange = (event) => {
-        const { name, value, type, checked } = event.target;
-        const valueToUse = type === "checkbox" ? checked : value;
-        change(name, valueToUse);
-      };
-
+      postNewOrder(newOrder);
+    };
+  
     return(
         <div>
             <div className="header">
@@ -32,18 +91,22 @@ function PizzaBuilder(props) {
             
         <form onSubmit={onSubmit}>
             <div>
-                
+                    
             </div>
             <div>
                 <h2>Choice of Size</h2>
                 <h4>Required</h4>
-                <select>
+                <select
+                    name="toppings"
+                    type="text"
+                    // value={pizzaValues.toppings}
+                    onChange={onChange}>
                     <option>-----Select Size-----</option>
-                    <option>XL</option>
-                    <option>Large</option>
-                    <option>Medium</option>
-                    <option>Small</option>
-                    <option>Kids</option>
+                    <option value='xl'>XL</option>
+                    <option value='large'>Large</option>
+                    <option value='medium'>Medium</option>
+                    <option value='small'>Small</option>
+                    <option value='kids'>Kids</option>
                 </select>
             </div>
 
@@ -52,7 +115,10 @@ function PizzaBuilder(props) {
                 <label>
                     <input 
                         type="radio"
-                        name="Original Red"
+                        name="sauce"
+                        id="sauce"
+                        value="redSauce"
+                        checked={pizzaValues.sauce === 'originalRed'}
                     ></input>
                 Original Red
                 </label>
@@ -60,7 +126,9 @@ function PizzaBuilder(props) {
                 <label>
                     <input 
                         type="radio"
-                        name="Original Red"
+                        name="sauce"
+                        value="garlicSauce"
+                        checked={pizzaValues.sauce === 'garlicSauce'}
                     ></input>
                 Garlic Ranch
                 </label>
@@ -68,7 +136,9 @@ function PizzaBuilder(props) {
                 <label>
                     <input 
                         type="radio"
-                        name="Original Red"
+                        name="sauce"
+                        value="bbq"
+                        checked={pizzaValues.sauce === 'bbq'}
                     ></input>
                 BBQ Sauce
                 </label>
@@ -76,7 +146,9 @@ function PizzaBuilder(props) {
                 <label>
                     <input 
                         type="radio"
-                        name="Original Red"
+                        name="sauce"
+                        value="spinachAlfredo"
+                        checked={pizzaValues.sauce === 'spinachAlfredo'}
                     ></input>
                 Spinach Alfredo
                 </label>
@@ -91,9 +163,10 @@ function PizzaBuilder(props) {
 
                 <label>
                     <input 
-                        type="checkbox"
-                        name="Pepperoni"
-                        // checked={values.pepperoni}
+                       type="checkbox"
+                       name="pepperoni"
+                       checked={pizzaValues.pepperoni}
+                       onChange={onChange}
                     ></input>
                 Pepperoni
                 </label>
@@ -101,8 +174,9 @@ function PizzaBuilder(props) {
                 <label>
                     <input 
                         type="checkbox"
-                        name="Sausage"
-                        // checked={values.sausage}
+                        name="sausage"
+                        checked={pizzaValues.sausage}
+                        onChange={onChange}
                     ></input>
                 Sausage
                 </label>
@@ -110,8 +184,9 @@ function PizzaBuilder(props) {
                 <label>
                     <input 
                         type="checkbox"
-                        name="Canadian Bacon"
-                        // checked={values.canadianBacon}
+                        name="canadianBacon"
+                        checked={pizzaValues.canadianBacon}
+                        onChange={onChange}
                     ></input>
                 Canadian Bacon
                 </label>
@@ -119,8 +194,9 @@ function PizzaBuilder(props) {
                 <label>
                     <input 
                         type="checkbox"
-                        name="Spicy Italian Sausage"
-                        // checked={values.italianSausage}
+                        name="spicyItalianSausage"
+                        checked={pizzaValues.spicyItalianSausage}
+                        onChange={onChange}
                     ></input>
                 Spicy Italian Sausage
                 </label>
@@ -128,8 +204,9 @@ function PizzaBuilder(props) {
                 <label>
                     <input 
                         type="checkbox"
-                        name="Grilled Chicken"
-                        // checked={values.grilledChicken}
+                        name="grilledChicken"
+                        checked={pizzaValues.grilledChicken}
+                        onChange={onChange}
                     ></input>
                 Grilled Chicken
                 </label>
@@ -137,8 +214,9 @@ function PizzaBuilder(props) {
                 <label>
                     <input 
                         type="checkbox"
-                        // checked={values.onion}
-                        name="Onions"
+                        name="onion"
+                        checked={pizzaValues.onion}
+                        onChange={onChange}
                     ></input>
                 Onions
                 </label>
@@ -152,8 +230,9 @@ function PizzaBuilder(props) {
                 <label>
                     <input 
                         type="checkbox"
-                        // checked={values.glutenBox}
-                        name="Gluten Free Crust"
+                        name="gfCrust"
+                        checked={pizzaValues.glutenBox}
+                        onChange={onChange}
                     ></input>
                 Gluten Free Crust (+ $1.00)
                 </label>
@@ -163,16 +242,18 @@ function PizzaBuilder(props) {
                 <h2>Special Instructions</h2>
                 <input
                 type="text"
-                placeholder="Anything else you'd like to add?"
+                placeholder="Special Requests?"
                 onChange={onChange}
-                name="extraInstructions"
+                name="specialRequest"
+                checked = {pizzaValues.specialRequest}
                 >
                 </input>
             </div>
 
 
-            <Link to='/Confirmation'>Add to Order</Link>
+            <Link id="submit" disabled={disabled} to='/Confirmation'>Add to Order</Link>
         </form>
+
         </div>
         
         </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useRouteMatch } from 'react-router-dom'
+import Pizza from './Assets/Pizza.jpg'
 
 
 function Confirmation(props) {
@@ -22,11 +23,11 @@ function Confirmation(props) {
 
             </div>
             <div>
-                <h2>Enjoy this dog with Pizza</h2>
-                <image></image>
+                <img className="pizzaConfirm" src={Pizza}></img>
+                <h2>We hope to see you again, Enjoy!</h2>
             </div>
         </div>
     )
 }
 
-export default Confirmation
+export default Confirmation;
