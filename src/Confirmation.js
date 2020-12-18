@@ -17,6 +17,7 @@ function Confirmation(props) {
                 <button>Help</button>
             </div>
             <div>
+                <image src='./Assets/Pizza.jpg'></image>
                 <h1>Congrats! Pizza is on it's way!</h1>
 
             </div>
