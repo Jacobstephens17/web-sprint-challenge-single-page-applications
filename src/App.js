@@ -1,61 +1,26 @@
-import React from "react";
+import React,{ useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import PizzaBuilder from './PizzaBuilder'
+import HomePage from './HomePage'
+import Confirmation from './Confirmation'
 
-const App = () => {
+const emptyPizza = {
+  
+}
+
+
+
+const App = () => { 
+  const [pizzaToppings, setPizzaToppings] = useState(emptyPizza)
   return (
-    <>
-    <div className="header">
-    
-      <h1>Lambda Eats</h1>
-    
-      <button>
-        Home
-      </button>
-    
-      <button>
-        Help
-      </button>
-   
-    </div>
-
     <div>
-
-      <p>Your Favorite food, delivered while coding</p>
-
-      <button>Pizza?</button>
-    
+      <Switch>
+        <Route exact path='/' component={HomePage}/>
+        <Route path='/PizzaBuilder' component={PizzaBuilder}/>
+        <Route path='/Confirmation' component={Confirmation}/>
+      </Switch>
     </div>
+  )
+}; 
 
-    
-    <div>
-      <h2>Food delivery in Gotham City</h2>
-      <image></image>  
-      <h4>McDonald's</h4>
-      <p>$ - American - Fast Food - Burgers</p>
-      <p><span>20-30 Min</span> <span>$5.99 Deleivery Fee</span></p>
-    </div>
-
-    <div>
-      <image></image>  
-      <h4>Canes</h4>
-      <p>$ - American - Fast Food - Chicken</p>
-      <p><span>20-30 Min</span> <span>$5.99 Deleivery Fee</span></p>
-    </div>
-
-    <div>
-      <image></image>  
-      <h4>Burger King</h4>
-      <p>$ - American - Fast Food - Burgers</p>
-      <p><span>20-30 Min</span> <span>$5.99 Deleivery Fee</span></p>
-    </div>
-
-    <div>
-      <image></image>  
-      <h4>Panda Express</h4>
-      <p>$ - American - Fast Food - Chinese</p>
-      <p><span>20-30 Min</span> <span>$5.99 Deleivery Fee</span></p>
-    </div>
-
-    </>
-  );
-};
 export default App;

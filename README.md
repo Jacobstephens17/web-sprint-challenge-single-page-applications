@@ -52,14 +52,14 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 Your finished project must include all of the following requirements:
 
-- [ ] A homepage that has a "/" route and links to your form (button, nav bar, or any other type of link is acceptable)
-- [ ] A form with a "/pizza" route
-- [ ] A name text input field
-- [ ] Validation for name - name must be at least 2 characters
-- [ ] A dropdown for pizza size
-- [ ] A checklist for toppings - at least 4 (hint: name each separately!)
-- [ ] Text input for special instructions
-- [ ] An Add to Order button that submits form and returns a database record of name, size, toppings and special instructions
+- [1] A homepage that has a "/" route and links to your form (button, nav bar, or any other type of link is acceptable)
+- [1] A form with a "/pizza" route
+- [1] A name text input field
+- [1] Validation for name - name must be at least 2 characters
+- [1] A dropdown for pizza size
+- [1] A checklist for toppings - at least 4 (hint: name each separately!)
+- [1] Text input for special instructions
+- [1] An Add to Order button that submits form and returns a database record of name, size, toppings and special instructions
 
 #### Testing MVP
 
