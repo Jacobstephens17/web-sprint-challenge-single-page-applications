@@ -31,32 +31,35 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Demonstrate your understanding of this week's concepts by answering the following free-form questions. Edit this document to include your answers after each question.
 
 1. In 1-2 sentences, explain what React's `useRouteMatch` hook is used for.
+    useRouteMatch allows you to define a route or flow through the different pages
 1. How would you explain form validation to someone who has never programmed before?
-1. In 1-2 sentences, define end to end testing.
+    Is a way of checking the form for required or expected input fields
+1. In 1-2 sentences, define end to end testing. 
+    The process of testing the application or website throughout the entire navigation process to make sure everything works and returns the correct information to you and the user
 
 ## Instructions
 
 ### Task 1: Project Set Up
 
-- [ ] Create a forked copy of this project
-- [ ] Add your team lead as collaborator on Github
-- [ ] Clone your OWN version of the repository (Not Lambda's by mistake!)
-- [ ] Create a new branch: `git checkout -b <firstName-lastName>`
-- [ ] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly
-- [ ] Push commits: `git push origin <firstName-lastName>`
+- [1] Create a forked copy of this project
+- [1] Add your team lead as collaborator on Github
+- [1] Clone your OWN version of the repository (Not Lambda's by mistake!)
+- [1] Create a new branch: `git checkout -b <firstName-lastName>`
+- [1] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly
+- [1] Push commits: `git push origin <firstName-lastName>`
 
 ### Task 2: Project Requirements
 
 Your finished project must include all of the following requirements:
 
-- [ ] A homepage that has a "/" route and links to your form (button, nav bar, or any other type of link is acceptable)
-- [ ] A form with a "/pizza" route
-- [ ] A name text input field
-- [ ] Validation for name - name must be at least 2 characters
-- [ ] A dropdown for pizza size
-- [ ] A checklist for toppings - at least 4 (hint: name each separately!)
-- [ ] Text input for special instructions
-- [ ] An Add to Order button that submits form and returns a database record of name, size, toppings and special instructions
+- [1] A homepage that has a "/" route and links to your form (button, nav bar, or any other type of link is acceptable)
+- [1] A form with a "/pizza" route
+- [1] A name text input field
+- [1] Validation for name - name must be at least 2 characters
+- [1] A dropdown for pizza size
+- [1] A checklist for toppings - at least 4 (hint: name each separately!)
+- [1] Text input for special instructions
+- [1] An Add to Order button that submits form and returns a database record of name, size, toppings and special instructions
 
 #### Testing MVP
 
