@@ -40,26 +40,26 @@ const initialPizzaValues = {
   
     const onChange = (evt) => {
       const { name, value, type, checked } = evt.target;
-      const valueToUse = type === "checkbox" ? checked : value;
-      yup
-        .reach(schema, name)
-        .validate(value)
-        .then(() => {
-          setFormErrors({
-            ...formErrors,
-            [name]: "",
-          });
-        })
-        .catch((err) => {
-          setFormErrors({
-            ...formErrors,
-            [name]: err.errors[0],
-          });
-        });
-      setpizzaValues({
-        ...pizzaValues,
-        [name]: valueToUse,
-      });
+      const valueToUse = type === "checkbox" || "radio" ? checked : value;
+    //   yup
+    //     .reach(schema, name, value, type, checked)
+    //     .validate(value, type, name, checked)
+    //     .then(() => {
+    //       setFormErrors({
+    //         ...formErrors,
+    //         [name]: "",
+    //       });
+    //     })
+    //     .catch((err) => {
+    //       setFormErrors({
+    //         ...formErrors,
+    //         [name]: err.errors[0],
+    //       });
+    //     });
+    //   setpizzaValues({
+    //     ...pizzaValues,
+    //     [name]: valueToUse,
+    //   });
     };
   
     const onSubmit = (e) => {
@@ -116,7 +116,6 @@ const initialPizzaValues = {
                     <input 
                         type="radio"
                         name="sauce"
-                        id="sauce"
                         value="redSauce"
                         checked={pizzaValues.sauce === 'originalRed'}
                     ></input>
