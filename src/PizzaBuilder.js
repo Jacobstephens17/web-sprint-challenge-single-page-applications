@@ -11,10 +11,11 @@ const initialPizzaValues = {
     sauce: "",
     pepperoni: false,
     sausage: false,
-    mushrooms: false,
-    olives: false,
-    glutenFree: false,
-    special: "",
+    canadianBacon:false,
+    spicyItalianSausage:false,
+    grilledChicken:false,
+    onion:false,
+    
   };
   
   const initFormErrors = {
@@ -22,7 +23,9 @@ const initialPizzaValues = {
     sauce: "",
   };
   
-  const toppingsList = ["pepperoni", "sausage", "mushrooms", "olives"];
+  const toppingsList = ["pepperoni", "sausage", "sausage", "canadianBacon", "spicyItalianSausage", "grilledChicken", "onion"];
+  
+
   
   const PizzaBuilder = () => {
     const [pizzaValues, setpizzaValues] = useState(initialPizzaValues);
@@ -32,34 +35,35 @@ const initialPizzaValues = {
   
 
   
-    const postNewOrder = (newOrder) => {
-      axios.post("https://reqres.in/api/users", newOrder).then((result) => {
-        setpizzaValues(initialPizzaValues);
-      });
-    };
+    // const postNewOrder = (newOrder) => {
+    //   axios.post("https://reqres.in/api/users", newOrder).then((result) => {
+    //     setpizzaValues(initialPizzaValues);
+    //   });
+    // };
   
     const onChange = (evt) => {
-      const { name, value, type, checked } = evt.target;
-      const valueToUse = type === "checkbox" || "radio" ? checked : value;
+      const { pizzaValues, value, type, checked } = evt.target;
+      const valueToUse = type === "checkbox" ? checked : value;
     //   yup
-    //     .reach(schema, name, value, type, checked)
-    //     .validate(value, type, name, checked)
+    //     .reach(schema, pizzaValues)
+    //     .validate(value)
     //     .then(() => {
     //       setFormErrors({
     //         ...formErrors,
-    //         [name]: "",
+    //         [pizzaValues]: "",
     //       });
     //     })
     //     .catch((err) => {
     //       setFormErrors({
     //         ...formErrors,
-    //         [name]: err.errors[0],
+    //         [pizzaValues]: err.errors[0],
     //       });
     //     });
     //   setpizzaValues({
     //     ...pizzaValues,
-    //     [name]: valueToUse,
+    //     [pizzaValues]: valueToUse,
     //   });
+    //   setDisabled(true)
     };
   
     const onSubmit = (e) => {
@@ -73,12 +77,13 @@ const initialPizzaValues = {
         glutenFree: pizzaValues.glutenFree,
         special: pizzaValues.special,
       };
-      postNewOrder(newOrder);
+      setpizzaValues(newOrder)
+    //   postNewOrder(newOrder);
     };
   
     return(
         <div>
-            <div className="header">
+            <div classpizzaValues="header">
         
                 <h1>Lambda Eats</h1>
 
@@ -97,8 +102,9 @@ const initialPizzaValues = {
                 <h2>Choice of Size</h2>
                 <h4>Required</h4>
                 <select
-                    name="toppings"
+                    pizzaValues="toppings"
                     type="text"
+                    name="dropdown"
                     // value={pizzaValues.toppings}
                     onChange={onChange}>
                     <option>-----Select Size-----</option>
@@ -115,7 +121,7 @@ const initialPizzaValues = {
                 <label>
                     <input 
                         type="radio"
-                        name="sauce"
+                        pizzaValues="sauce"
                         value="redSauce"
                         checked={pizzaValues.sauce === 'originalRed'}
                     ></input>
@@ -125,7 +131,7 @@ const initialPizzaValues = {
                 <label>
                     <input 
                         type="radio"
-                        name="sauce"
+                        pizzaValues="sauce"
                         value="garlicSauce"
                         checked={pizzaValues.sauce === 'garlicSauce'}
                     ></input>
@@ -135,7 +141,7 @@ const initialPizzaValues = {
                 <label>
                     <input 
                         type="radio"
-                        name="sauce"
+                        pizzaValues="sauce"
                         value="bbq"
                         checked={pizzaValues.sauce === 'bbq'}
                     ></input>
@@ -145,7 +151,7 @@ const initialPizzaValues = {
                 <label>
                     <input 
                         type="radio"
-                        name="sauce"
+                        pizzaValues="sauce"
                         value="spinachAlfredo"
                         checked={pizzaValues.sauce === 'spinachAlfredo'}
                     ></input>
@@ -163,7 +169,8 @@ const initialPizzaValues = {
                 <label>
                     <input 
                        type="checkbox"
-                       name="pepperoni"
+                       pizzaValues="pepperoni"
+                       value="pepperoni"
                        checked={pizzaValues.pepperoni}
                        onChange={onChange}
                     ></input>
@@ -173,7 +180,7 @@ const initialPizzaValues = {
                 <label>
                     <input 
                         type="checkbox"
-                        name="sausage"
+                        pizzaValues="sausage"
                         checked={pizzaValues.sausage}
                         onChange={onChange}
                     ></input>
@@ -183,7 +190,7 @@ const initialPizzaValues = {
                 <label>
                     <input 
                         type="checkbox"
-                        name="canadianBacon"
+                        pizzaValues="canadianBacon"
                         checked={pizzaValues.canadianBacon}
                         onChange={onChange}
                     ></input>
@@ -193,7 +200,7 @@ const initialPizzaValues = {
                 <label>
                     <input 
                         type="checkbox"
-                        name="spicyItalianSausage"
+                        pizzaValues="spicyItalianSausage"
                         checked={pizzaValues.spicyItalianSausage}
                         onChange={onChange}
                     ></input>
@@ -203,7 +210,7 @@ const initialPizzaValues = {
                 <label>
                     <input 
                         type="checkbox"
-                        name="grilledChicken"
+                        pizzaValues="grilledChicken"
                         checked={pizzaValues.grilledChicken}
                         onChange={onChange}
                     ></input>
@@ -213,7 +220,7 @@ const initialPizzaValues = {
                 <label>
                     <input 
                         type="checkbox"
-                        name="onion"
+                        pizzaValues="onion"
                         checked={pizzaValues.onion}
                         onChange={onChange}
                     ></input>
@@ -229,7 +236,7 @@ const initialPizzaValues = {
                 <label>
                     <input 
                         type="checkbox"
-                        name="gfCrust"
+                        pizzaValues="gfCrust"
                         checked={pizzaValues.glutenBox}
                         onChange={onChange}
                     ></input>
@@ -244,6 +251,7 @@ const initialPizzaValues = {
                 placeholder="Special Requests?"
                 onChange={onChange}
                 name="specialRequest"
+                pizzaValues="specialRequest"
                 checked = {pizzaValues.specialRequest}
                 >
                 </input>

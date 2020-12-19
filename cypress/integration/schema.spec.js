@@ -5,7 +5,6 @@ describe("Lambda Eats App", () => {
   })
 
   const submitButton = () => cy.get('#submit');
-  const sauceClick = () => cy.get('input[name="sauce"]');
   const inputText = () => cy.get('input[name="specialRequest"]')
 
   it("sanity test to make sure tests work", () => {
@@ -21,9 +20,10 @@ describe("Lambda Eats App", () => {
 
   it('should type text', () => {
     submitButton().click()
-    inputText().should("have.value", "")
-    inputText().type("None")
-    inputText().should("have.value", "None");
+    inputText().should('have.value', '')
+    inputText().type('Hello')
+    inputText().should('have.value', 'Hello')
+    // submitButton().click()
   })
- 
+  
 })
